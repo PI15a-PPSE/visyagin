@@ -9,13 +9,13 @@
          xmlns:html="http://www.w3.org/1999/xhtml"
          xmlns:db="http://docbook.org/ns/docbook">
   <info>
-    <title>Программный Продукт "Кликер"</title>
+    <title>РџСЂРѕРіСЂР°РјРјРЅС‹Р№ РџСЂРѕРґСѓРєС‚ "РљР»РёРєРµСЂ"</title>
 
     <author>
-      <personname><firstname>Максим</firstname><surname>Висягин</surname></personname>
+      <personname><firstname>РњР°РєСЃРёРј</firstname><surname>Р’РёСЃСЏРіРёРЅ</surname></personname>
 
       <affiliation>
-        <orgname>ДонНТУ</orgname>
+        <orgname>Р”РѕРЅРќРўРЈ</orgname>
       </affiliation>
     </author>
 
@@ -23,24 +23,24 @@
   </info>
 
   <section>
-    <title>Описание продукта</title>
+    <title>РћРїРёСЃР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р°</title>
 
-    <para>Программный продукт <emphasis role="bold">Кликер </emphasis>был
-    разработан для развлечения. Игра содержит в себе поле с текстурой и предназначена
-    для одного игрока.</para>
+    <para>РџСЂРѕРіСЂР°РјРјРЅС‹Р№ РїСЂРѕРґСѓРєС‚ <emphasis role="bold">РљР»РёРєРµСЂ </emphasis>Р±С‹Р»
+    СЂР°Р·СЂР°Р±РѕС‚Р°РЅ РґР»СЏ СЂР°Р·РІР»РµС‡РµРЅРёСЏ. РРіСЂР° СЃРѕРґРµСЂР¶РёС‚ РІ СЃРµР±Рµ РїРѕР»Рµ СЃ С‚РµРєСЃС‚СѓСЂРѕР№ Рё РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅР°
+    РґР»СЏ РѕРґРЅРѕРіРѕ РёРіСЂРѕРєР°.</para>
   </section>
 
   <section>
-    <title>Первый запуск</title>
+    <title>РџРµСЂРІС‹Р№ Р·Р°РїСѓСЃРє</title>
 
-    <para>При первом запуске игры пользователю предоставлено поле и игра сразу же начинается, игроку нужно кликать на монетки, пример загрузки картинок представлен ниже:</para>
+    <para>РџСЂРё РїРµСЂРІРѕРј Р·Р°РїСѓСЃРєРµ РёРіСЂС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРѕ РїРѕР»Рµ Рё РёРіСЂР° СЃСЂР°Р·Сѓ Р¶Рµ РЅР°С‡РёРЅР°РµС‚СЃСЏ, РёРіСЂРѕРєСѓ РЅСѓР¶РЅРѕ РєР»РёРєР°С‚СЊ РЅР° РјРѕРЅРµС‚РєРё, РїСЂРёРјРµСЂ Р·Р°РіСЂСѓР·РєРё РєР°СЂС‚РёРЅРѕРє РїСЂРµРґСЃС‚Р°РІР»РµРЅ РЅРёР¶Рµ:</para>
     
     <programlisting>Layer.prototype.loader = function () {
 		console.log("Loader");
 
 		var self = this,
 			loader = PIXI.loader,
-			assetList = [ // Cписок изображений
+			assetList = [ // CРїРёСЃРѕРє РёР·РѕР±СЂР°Р¶РµРЅРёР№
 				{"name": "fon", url: "images/fon.jpg"},
 				{"name": "panel_with_line", url: "images/panel_with_line.jpg"},
 				{"name": "start_btn", url: "images/start_btn.png"},
@@ -50,22 +50,22 @@
 				{"name": "factory", url: "images/factory.png"},
 			];
 
-		loader.add( assetList ); // Отправляем список изображений в загрузчик
+		loader.add( assetList ); // РћС‚РїСЂР°РІР»СЏРµРј СЃРїРёСЃРѕРє РёР·РѕР±СЂР°Р¶РµРЅРёР№ РІ Р·Р°РіСЂСѓР·С‡РёРє
 		loader.once('complete', function(e){
-			self.init(); // По завершению - инициализировать уровень
+			self.init(); // РџРѕ Р·Р°РІРµСЂС€РµРЅРёСЋ - РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ СѓСЂРѕРІРµРЅСЊ
 		}).load();
 
 	};
 programlisting>
 
-    <para>При создании поля идет инициализация уровня, функция предоставлена ниже:</para>
+    <para>РџСЂРё СЃРѕР·РґР°РЅРёРё РїРѕР»СЏ РёРґРµС‚ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СѓСЂРѕРІРЅСЏ, С„СѓРЅРєС†РёСЏ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅР° РЅРёР¶Рµ:</para>
 
     <programlisting>	Layer.prototype.init = function () {
 		console.log("Layer init");
 
 		var self = this;
 
-		// Настройки
+		// РќР°СЃС‚СЂРѕР№РєРё
 		this.stage = new PIXI.Container(0x000000, true);
 
 		this.TextureCache = PIXI.utils.TextureCache;
@@ -76,26 +76,26 @@ programlisting>
 		this.gameFieldWidth = this.viewWidth;
 		this.gameFieldHeight = this.viewHeight - this.TextureCache["images/panel_with_line.jpg"].height;
 
-		this.gameFieldPadding = 30; // Отступы на игровом поле
-		this.buttonPadding = 10; // Отступы у кнопок
-		this.counterPadding = 60; // Отступы у счётчика монет
+		this.gameFieldPadding = 30; // РћС‚СЃС‚СѓРїС‹ РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
+		this.buttonPadding = 10; // РћС‚СЃС‚СѓРїС‹ Сѓ РєРЅРѕРїРѕРє
+		this.counterPadding = 60; // РћС‚СЃС‚СѓРїС‹ Сѓ СЃС‡С‘С‚С‡РёРєР° РјРѕРЅРµС‚
 
-		this.money = 10; // Стартовое кол-во монет
-		this.moneyTarget = 500; // Цель игры
+		this.money = 10; // РЎС‚Р°СЂС‚РѕРІРѕРµ РєРѕР»-РІРѕ РјРѕРЅРµС‚
+		this.moneyTarget = 500; // Р¦РµР»СЊ РёРіСЂС‹
 		this.buildMoneyFromPlayerTrigger = 0;
 
-		this.ticker = PIXI.ticker.shared; // Глобальный таймер
+		this.ticker = PIXI.ticker.shared; // Р“Р»РѕР±Р°Р»СЊРЅС‹Р№ С‚Р°Р№РјРµСЂ
 		this.renderer = PIXI.autoDetectRenderer( this.viewWidth, this.viewHeight  );
 
-		this.fabricMax = 10; // Макс кол-во фабрик
-		this.factoryMax = 5; // Макс кол-во заводов
+		this.fabricMax = 10; // РњР°РєСЃ РєРѕР»-РІРѕ С„Р°Р±СЂРёРє
+		this.factoryMax = 5; // РњР°РєСЃ РєРѕР»-РІРѕ Р·Р°РІРѕРґРѕРІ
 
 		this.fabricArr = [];
 
 		this.fabricPrice = 20;
 		this.factoryPrice = 70;
 
-		this.fabricPositions = [ // Слоты Фабрик
+		this.fabricPositions = [ // РЎР»РѕС‚С‹ Р¤Р°Р±СЂРёРє
 			{ x: 100, y: 300},
 			{ x: 270, y: 300},
 			{ x: 440, y: 300},
@@ -108,7 +108,7 @@ programlisting>
 			{ x: 610, y: 450},
 			{ x: 780, y: 450},
 		];
-		self.factoryPositions = [// Слоты Заводов
+		self.factoryPositions = [// РЎР»РѕС‚С‹ Р—Р°РІРѕРґРѕРІ
 			{ x: 100, y: 100},
 			{ x: 270, y: 100},
 			{ x: 440, y: 100},
@@ -116,19 +116,19 @@ programlisting>
 			{ x: 780, y: 100},
 		];
 
-		this.ticker.stop(); // Ждём старта игры
+		this.ticker.stop(); // Р–РґС‘Рј СЃС‚Р°СЂС‚Р° РёРіСЂС‹
 
 		document.body.appendChild( this.renderer.view );
 
-		this.stage.addChild( PIXI.Sprite.fromImage("images/fon.jpg") ); // Фон
+		this.stage.addChild( PIXI.Sprite.fromImage("images/fon.jpg") ); // Р¤РѕРЅ
 
-		// Панель
+		// РџР°РЅРµР»СЊ
 		var panel = PIXI.Sprite.fromImage("images/panel_with_line.jpg");
 		panel.position.y = self.viewHeight - this.TextureCache["images/panel_with_line.jpg"].height;
 		this.stage.addChild( panel );
 
 
-		// Кроссбраузерная поддержка requestAnimationFrame
+		// РљСЂРѕСЃСЃР±СЂР°СѓР·РµСЂРЅР°СЏ РїРѕРґРґРµСЂР¶РєР° requestAnimationFrame
 		window.requestAnimFrame = function(){
 			return (
 				window.requestAnimationFrame       ||
@@ -147,7 +147,7 @@ programlisting>
 		self.tickerStarted = newDate;
 		self.ticker.update( newDate );
 
-		// Кнопка запуска игры
+		// РљРЅРѕРїРєР° Р·Р°РїСѓСЃРєР° РёРіСЂС‹
 		var startBtn = new PIXI.Sprite.fromImage("images/start_btn.png");
 		startBtn.interactive = true;
 		startBtn.buttonMode = true;
@@ -159,10 +159,10 @@ programlisting>
 			var startBtnId = layer.stage.getChildIndex( startBtnEl );
 			self.stage.removeChildAt(startBtnId);
 
-			self.startGame(step); // Запуск игры
+			self.startGame(step); // Р—Р°РїСѓСЃРє РёРіСЂС‹
 		}</programlisting>
 
-    <para>В игре кнопка перезапуска игры, код предоставлен ниже:</para>
+    <para>Р’ РёРіСЂРµ РєРЅРѕРїРєР° РїРµСЂРµР·Р°РїСѓСЃРєР° РёРіСЂС‹, РєРѕРґ РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅ РЅРёР¶Рµ:</para>
 
     <programlisting>	var startBtn = new PIXI.Sprite.fromImage("images/start_btn.png");
 		startBtn.interactive = true;
@@ -175,11 +175,11 @@ programlisting>
 			var startBtnId = layer.stage.getChildIndex( startBtnEl );
 			self.stage.removeChildAt(startBtnId);
 
-			self.startGame(step); // Запуск игры
+			self.startGame(step); // Р—Р°РїСѓСЃРє РёРіСЂС‹
 		}
 </programlisting>
 
-    <para>Таким образом, было рассмотрено 3 варианта развития событий, с
-    приведенным кодом.</para>
+    <para>РўР°РєРёРј РѕР±СЂР°Р·РѕРј, Р±С‹Р»Рѕ СЂР°СЃСЃРјРѕС‚СЂРµРЅРѕ 3 РІР°СЂРёР°РЅС‚Р° СЂР°Р·РІРёС‚РёСЏ СЃРѕР±С‹С‚РёР№, СЃ
+    РїСЂРёРІРµРґРµРЅРЅС‹Рј РєРѕРґРѕРј.</para>
   </section>
 </article>
