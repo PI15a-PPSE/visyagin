@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article version="5.1" xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xila="http://www.w3.org/2001/XInclude/local-attributes"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:trans="http://docbook.org/ns/transclusion"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+    <title>Программный Продукт "Кликер"</title>
+
+    <author>
+      <personname><firstname>Максим</firstname><surname>Висягин</surname></personname>
+
+      <affiliation>
+        <orgname>ДонНТУ</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>06-11-2018</pubdate>
+  </info>
+
+  <section>
+    <title>Описание продукта</title>
+
+    <para>Программный продукт <emphasis role="bold">Кликер </emphasis>был
+    разработан для развлечения. Игра содержит в себе поле с текстурой и предназначена
+    для одного игрока.</para>
+  </section>
+
+  <section>
+    <title>Первый запуск</title>
+
+    <para>При первом запуске игры пользователю предоставлено поле и игра сразу же начинается, игроку нужно кликать на монетки, пример загрузки картинок представлен ниже:</para>
+    
+    <programlisting>Layer.prototype.loader = function () {
+		console.log("Loader");
+
+		var self = this,
+			loader = PIXI.loader,
+			assetList = [ // Cписок изображений
+				{"name": "fon", url: "images/fon.jpg"},
+				{"name": "panel_with_line", url: "images/panel_with_line.jpg"},
+				{"name": "start_btn", url: "images/start_btn.png"},
+				{"name": "win", url: "images/win.png"},
+				{"name": "coin", url: "images/coin.png"},
+				{"name": "fabric", url: "images/fabric.png"},
+				{"name": "factory", url: "images/factory.png"},
+			];
+
+		loader.add( assetList ); // Отправляем список изображений в загрузчик
+		loader.once('complete', function(e){
+			self.init(); // По завершению - инициализировать уровень
+		}).load();
+
+	};
+programlisting>
+
+    <para>При создании поля идет инициализация уровня, функция предоставлена ниже:</para>
+
+    <programlisting>	Layer.prototype.init = function () {
+		console.log("Layer init");
+
+		var self = this;
+
+		// Настройки
+		this.stage = new PIXI.Container(0x000000, true);
+
+		this.TextureCache = PIXI.utils.TextureCache;
+
+		this.viewWidth = 1024;
+		this.viewHeight = 800;
+
+		this.gameFieldWidth = this.viewWidth;
+		this.gameFieldHeight = this.viewHeight - this.TextureCache["images/panel_with_line.jpg"].height;
+
+		this.gameFieldPadding = 30; // Отступы на игровом поле
+		this.buttonPadding = 10; // Отступы у кнопок
+		this.counterPadding = 60; // Отступы у счётчика монет
+
+		this.money = 10; // Стартовое кол-во монет
+		this.moneyTarget = 500; // Цель игры
+		this.buildMoneyFromPlayerTrigger = 0;
+
+		this.ticker = PIXI.ticker.shared; // Глобальный таймер
+		this.renderer = PIXI.autoDetectRenderer( this.viewWidth, this.viewHeight  );
+
+		this.fabricMax = 10; // Макс кол-во фабрик
+		this.factoryMax = 5; // Макс кол-во заводов
+
+		this.fabricArr = [];
+
+		this.fabricPrice = 20;
+		this.factoryPrice = 70;
+
+		this.fabricPositions = [ // Слоты Фабрик
+			{ x: 100, y: 300},
+			{ x: 270, y: 300},
+			{ x: 440, y: 300},
+			{ x: 610, y: 300},
+			{ x: 780, y: 300},
+
+			{ x: 100, y: 450},
+			{ x: 270, y: 450},
+			{ x: 440, y: 450},
+			{ x: 610, y: 450},
+			{ x: 780, y: 450},
+		];
+		self.factoryPositions = [// Слоты Заводов
+			{ x: 100, y: 100},
+			{ x: 270, y: 100},
+			{ x: 440, y: 100},
+			{ x: 610, y: 100},
+			{ x: 780, y: 100},
+		];
+
+		this.ticker.stop(); // Ждём старта игры
+
+		document.body.appendChild( this.renderer.view );
+
+		this.stage.addChild( PIXI.Sprite.fromImage("images/fon.jpg") ); // Фон
+
+		// Панель
+		var panel = PIXI.Sprite.fromImage("images/panel_with_line.jpg");
+		panel.position.y = self.viewHeight - this.TextureCache["images/panel_with_line.jpg"].height;
+		this.stage.addChild( panel );
+
+
+		// Кроссбраузерная поддержка requestAnimationFrame
+		window.requestAnimFrame = function(){
+			return (
+				window.requestAnimationFrame       ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame    ||
+				window.oRequestAnimationFrame      ||
+				window.msRequestAnimationFrame     ||
+				function( step ){
+					window.setTimeout(step, 1000 / 60);
+				}
+			);
+		}();
+
+		// Set Timer
+		var newDate = new Date();
+		self.tickerStarted = newDate;
+		self.ticker.update( newDate );
+
+		// Кнопка запуска игры
+		var startBtn = new PIXI.Sprite.fromImage("images/start_btn.png");
+		startBtn.interactive = true;
+		startBtn.buttonMode = true;
+		startBtn.anchor.set(0.5);
+		startBtn.position.set(self.viewWidth/2, self.viewHeight /2 );
+		var startBtnEl = this.stage.addChild( startBtn );
+
+		startBtn.click  = startBtn.tap = function(event){
+			var startBtnId = layer.stage.getChildIndex( startBtnEl );
+			self.stage.removeChildAt(startBtnId);
+
+			self.startGame(step); // Запуск игры
+		}</programlisting>
+
+    <para>В игре кнопка перезапуска игры, код предоставлен ниже:</para>
+
+    <programlisting>	var startBtn = new PIXI.Sprite.fromImage("images/start_btn.png");
+		startBtn.interactive = true;
+		startBtn.buttonMode = true;
+		startBtn.anchor.set(0.5);
+		startBtn.position.set(self.viewWidth/2, self.viewHeight /2 );
+		var startBtnEl = this.stage.addChild( startBtn );
+
+		startBtn.click  = startBtn.tap = function(event){
+			var startBtnId = layer.stage.getChildIndex( startBtnEl );
+			self.stage.removeChildAt(startBtnId);
+
+			self.startGame(step); // Запуск игры
+		}
+</programlisting>
+
+    <para>Таким образом, было рассмотрено 3 варианта развития событий, с
+    приведенным кодом.</para>
+  </section>
+</article>
