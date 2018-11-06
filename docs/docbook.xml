@@ -56,7 +56,7 @@
 		}).load();
 
 	};
-programlisting>
+    </programlisting>
 
     <para>При создании поля идет инициализация уровня, функция предоставлена ниже:</para>
 
@@ -160,7 +160,8 @@ programlisting>
 			self.stage.removeChildAt(startBtnId);
 
 			self.startGame(step); // Запуск игры
-		}</programlisting>
+		}
+    </programlisting>
 
     <para>В игре кнопка перезапуска игры, код предоставлен ниже:</para>
 
@@ -177,7 +178,7 @@ programlisting>
 
 			self.startGame(step); // Запуск игры
 		}
-</programlisting>
+    </programlisting>
 
     <para>Таким образом, было рассмотрено 3 варианта развития событий, с
     приведенным кодом.</para>
