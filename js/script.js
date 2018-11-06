@@ -3,7 +3,7 @@
  *
  * @Maks Visyagin
  *
- *	v. 0.2
+ *	v. 1.0
  */
 (function(){
 
@@ -445,4 +445,36 @@
 		}
 
 	}
+
+	/* Генерация позиции монеты по x */
+	Layer.prototype.generateRandomX = function () {
+		var x = -1;
+
+		while ( x < this.gameFieldPadding || x > this.gameFieldWidth-this.gameFieldPadding ) {
+			x = Math.random() * 10000;
+		}
+		return x;
+	}
+
+	/* Генерация позиции монеты по y */
+	Layer.prototype.generateRandomY = function () {
+		var y = -1;
+
+		while ( y < this.gameFieldPadding || y > this.gameFieldHeight-this.gameFieldPadding ) {
+			y = Math.random() * 10000;
+		}
+		return y;
+	}
+
+	/* Ждём загрузку DOM */
+	document.onreadystatechange = function () {
+		if (document.readyState == 'complete') {
+
+			// Создаём сцену
+			window.layer = new Layer;
+			window.layer.loader();
+
+		}
+	}
+
 })();
