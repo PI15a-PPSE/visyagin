@@ -1,18 +1,29 @@
 /**
  * Clicker Game for NNMDEV
+ * Игра кликер
  *
- * @Maks Visyagin
+ * @author Maks Visyagin
+ * @version 1.0
+ * @date 17.11.2018
  *
- *  v. 1.0
  */
+
 (function(){
 
-    /* Уровень */
+    /* Уровень 
+     * 
+     * @params null
+     * @returns null
+     */
     function Layer() {
         console.log("New layer");
     }
 
-    /* Загрузчик картинок */
+    /* Загрузчик картинок 
+    *
+    * @params null
+    * @returns null
+    */
     Layer.prototype.loader = function () {
         console.log("Loader");
 
@@ -35,7 +46,11 @@
 
     };
 
-    /* Инициализация уровня */
+    /* Инициализация уровня 
+    *
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.init = function () {
         console.log("Layer init");
 
@@ -177,14 +192,22 @@
 
     };
 
-    /* Наведение мышьки на кнопки */
+    /* Наведение мышьки на кнопки 
+    *
+    * @params {Event} e
+    * @returns null
+    */
     Layer.prototype.mouseOverEvent = function (e) {
         this.scale.set(1.1);
     }
     Layer.prototype.mouseOutEvent = function (e) {
         this.scale.set(1);
     }
-    /* Фильтр пикселизация */
+    /* Фильтр пикселизация 
+    *
+    *  @params {Int} size
+    *  @returns null
+    */
     Layer.prototype.setPixelateFilter = function (size) {
         var self = this;
 
@@ -198,6 +221,11 @@
         this.renderer.render( self.stage );
     }
 
+    /* Инициализация графического инетрфейса
+    * 
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.initGUI = function () {
         var self = this;
 
@@ -257,7 +285,11 @@
         requestAnimationFrame( step );
     }
 
-    /* Проверка достижения цели */
+    /* Проверка достижения цели 
+    *  
+    *  @params {Int} money
+    *  @returns null
+    */
     Layer.prototype.checkWin = function (money) {
         var self = this;
 
@@ -272,7 +304,11 @@
         }
     }
 
-    /* Генерация монет Игроком */
+    /* Генерация монет Игроком 
+    *  
+    *  @params {Int} money
+    *  @returns null
+    */
     Layer.prototype.checkPlayerGenerate = function (money) {
         var self = this;
 
@@ -287,7 +323,11 @@
         }
     }
 
-    /* Генерация монет Фабриками */
+    /* Генерация монет Фабриками 
+    *  
+    *  @params {Int} money
+    *  @returns null
+    */
     Layer.prototype.checkFabricGenerate = function (money) {
         var self = this;
         var fabricCount = this.fabricArr.length;
@@ -314,7 +354,11 @@
 
     }
 
-    /* Генерация монет Заводами */
+    /* Генерация монет Заводами
+    *  
+    *  @params {Int} money
+    *  @returns null
+    */
     Layer.prototype.checkFactoryGenerate = function (money) {
 
         var self = this;
@@ -344,12 +388,20 @@
 
     }
 
-    /* Счётчик монет */
+    /* Счётчик монет 
+    *  
+    *  @params {Int} money
+    *  @returns null
+    */
     Layer.prototype.drawCounter = function (money) {
         this.moneyCountText.text = money;
     }
 
-    /* Покупка Фабрики */
+    /* Покупка Фабрики 
+    *  
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.addFabric = function () {
         // console.log("addFabric");
 
@@ -382,7 +434,11 @@
         }
     }
 
-    /* Покупка Завода */
+    /* Покупка Завода
+    *  
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.addFactory = function () {
         // console.log("addFactory");
 
@@ -420,7 +476,11 @@
         }
     }
 
-    /* Генерация монеты на поле */
+    /* Генерация монеты на поле 
+    *  
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.spawnMoney = function () {
         // console.log("spawnMoney");
 
@@ -456,7 +516,11 @@
         return x;
     }
 
-    /* Генерация позиции монеты по y */
+    /* Генерация позиции монеты по y 
+    *  
+    *  @params null
+    *  @returns null
+    */
     Layer.prototype.generateRandomY = function () {
         var y = -1;
 
@@ -466,7 +530,11 @@
         return y;
     }
 
-    /* Ждём загрузку DOM */
+    /* Ждём загрузку DOM
+    *  
+    *  @params null
+    *  @returns null
+    */
     document.onreadystatechange = function () {
         if (document.readyState == 'complete') {
 
